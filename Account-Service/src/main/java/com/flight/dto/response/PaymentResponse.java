@@ -1,0 +1,14 @@
+package com.flight.dto.response;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class PaymentResponse {
+    private Integer paymentId;
+    private String paymentAmount;
+
+}

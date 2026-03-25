@@ -1,0 +1,27 @@
+
+# ===============================
+# = DATA SOURCE CONFIGURATION
+# ===============================
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/Flight_Reservation_System
+    username: root
+    password: Pass@123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
+
+# Jwt Secret key
+jwt:
+  secret: 63f4945d921d599f27ae4fdf5bada3f1        # 32 char length
+  access:
+    expiration: 3600000                             # milliseconds    - 60 minutes
+  refresh:
+    expiration: 604800000                           # 7 days
