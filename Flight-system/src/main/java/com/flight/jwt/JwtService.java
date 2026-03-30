@@ -2,8 +2,8 @@ package com.flight.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
+@Slf4j
 public class JwtService {
 
     @Value("${jwt.secret}")
@@ -25,14 +26,14 @@ public class JwtService {
     private long refreshTokenExpiration;
 
     private Key getKey(){
-        System.out.println("getkey() method-> " + Keys.hmacShaKeyFor(secret.getBytes()).toString());
+        log.debug("Generating signing key from secret");
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    PasswordEncoder p;
 
     // generate Access Token
     public String generateAccessToken(String username){
+        log.info("Generating access token for user: {}", username);
         Map<String, Object> claims = new HashMap<>();
         String newJwtToken = Jwts.builder()
                 .setClaims(claims)
@@ -41,12 +42,13 @@ public class JwtService {
                 .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpiration))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
-        System.out.println("New Generated JWT Token: " + newJwtToken);
+        log.debug("Access token generated successfully for user: {}", username);
         return newJwtToken;
     }
 
     //generate Refresh Token
     public String generateRefreshToken(String username){
+        log.info("Generating refresh token for user: {}", username);
         Map<String, Object> claims = new HashMap<>();
         String newRefreshToken = Jwts.builder()
                 .setClaims(claims)
@@ -54,35 +56,35 @@ public class JwtService {
                 .setExpiration(new Date(System.currentTimeMillis() + refreshTokenExpiration))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
-        System.out.println("New Generated JWT Token: " + newRefreshToken);
+        log.debug("Refresh token generated successfully for user: {}", username);
         return newRefreshToken;
     }
 
     //extract Username from token
     public String extractUsername(String token){
-        String jwtParsed = Jwts.parserBuilder()
+        log.debug("Extracting username from token");
+        String username = Jwts.parserBuilder()
                 .setSigningKey(getKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
-        System.out.println("Jwt token parse - "+ jwtParsed);
-        return jwtParsed;
+        log.info("Username extracted: {}", username);
+        return username;
     }
 
     // validate
     public boolean validateToken(String token){
+        log.info("Validating JWT token");
         String[] parts = token.split("\\.");
         if(parts.length != 3) {
-//            log.error("Unexpected Token length");
+            log.error("Invalid token format: expected 3 parts but got {}", parts.length);
             return false;
         }
 
         // check is token valid.
         // generate signature using:  header, payload of given token + secret key
         // if generated signature same as the signature which pass in given token, then valid.  Else Invalid.
-
-
         try {
             //get claims
             Claims claims = Jwts.parserBuilder()
@@ -91,26 +93,18 @@ public class JwtService {
                     .parseClaimsJws(token)
                     .getBody();
             String userId = claims.getSubject();
-            System.out.println("User Id->" + userId);
-
-            //check token expiry
-            Date expiration = claims.getExpiration();
-            if(isTokenExpired(token)){
-                return false;
-            }
-            // System.out.println("Expiration -> "+ expiration);
-
+            log.info("Token is valid for user: {}", userId);
             return true;
         } catch (ExpiredJwtException e) {
-            // log.error("token expired");
+             log.error("token expired");
         } catch (MalformedJwtException e) {
-            // log.error("invalid format");
+             log.error("invalid format");
         } catch (SecurityException e) {
-            // log.error("signature mismatch");
+             log.error("signature mismatch");
         } catch (UnsupportedJwtException e) {
-            // log.error("unsupported token");
+             log.error("unsupported token");
         } catch (IllegalArgumentException e) {
-            // log.error("empty token");
+             log.error("empty token");
         }
         return false;
     }

@@ -11,3 +11,55 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+jwt:
+  token: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTdW5ueSIsImlhdCI6MTc3NDc2MzI1MiwiZXhwIjoxNzc0NzY2ODUyfQ.vnntYfc9YT33IT95JRT_2GTZBU2nrd1h1o9TUh4WGGk"
+
+#Signing
+#Account:
+#  service:
+#    private-key: |
+#      -----BEGIN PRIVATE KEY-----
+#      MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDeZ7Mkam5z75uK
+#      JZE1aRrpzAfvZZOliHOL/s3PtMxS7AvpQo89Se6YkXe0i174WkZbSSu+M1KDrVm0
+#      bpsMKSUj2UJBHaTgZWILssK9TdEkiicNDaTf2qiBUCtzNbLcRbM7eKErPshnExWP
+#      YK7ExhYRTUAvAZ80n74f3O7U1MoA2pdroj14pjeZcQRLABYfYYohJtSxMDsK50uZ
+#      GIJwai14vG9xWxb6nyVyVf7LIsoAFMmns+ouW2rS7EpuzoSXy9/rZqqWC5oNldIb
+#      zoPZ0e04e7HfjMM+dybC/q2jfUY1gjQsatGZaRbrvbDH4ggZbZEt1wtKuVib1RKf
+#      pmf2gtbFAgMBAAECggEAAwpXjjUUkPkWimNrLKM0AlLjxSzURSvEtTNeM6XfSOif
+#      3OJ+r9TSMFuq+Nb0gcfcoDgN325Ccogev3QM/NXwZULQgkb+znspgbg6YHOD3v92
+#      jh2r+PlGsZcoyhRtKLIN4cfpdiIL1r8gtFdL+f2HMhWeyRtewqvVvDU3p9vtfRWu
+#      GpwjqXEyfflamJSWVj80ak+Lh3x5Zna5b8Qxp3SoOnasaW9jKeYVEKP3dhfp6J0h
+#      BS78PecTvCdU6G8hnxZHUzrNRRyBh9zfThbBlb3DYxnZYLmmefOi5pnYgEhdnHUR
+#      096sgbkTbvyT1oDoqcGOoLos/cKr+HgNpy3DQuoLGQKBgQDyA65XDECq1UiubL6q
+#      HsZrZGh67tHfl5X7UjGhogpVaYNPfQM++3N3893NuGD/abPG9Bcba0pGctF034Na
+#      5xVl0vGKuh/zUdzy5r4BUXVhuwzwVzNky9JeALnenW4UhWXgblKF00nDghJ2fIy7
+#      bRTTP1SdlwUa4bntHi7OI0uNGQKBgQDrQewQw9SmMbXnFFzztCjA4Fzkfif3DFUY
+#      LryNh5hDLTdAsNpbCx0qdi2irt5ZBRMjXOby0nkQqSrbEo7P7E0F1fH4jp78nS0K
+#      FDu+y21cznOdia+KheyK1lWfCaTYkClSiX1Eo5IZ+WZy3BtEpGrixPhCE/WiXxq2
+#      Y2aKe7sgjQKBgQCuITvlYel9gSxkY9XjrXTyfDI4kXDsQbMmOwN+2oo43kwee0JE
+#      pMN2AT8L76fK3hD+C0486jts6NwQDWoDk9TviJFGUZj/h11EYAVCCYw9n0o1+2f9
+#      FDHudPNHW1qC5WBh1L8Hjvi59PK30fGoQVoEjMKjCLAhoVwXYeonY3nOsQKBgQDo
+#      oT4yccMEOCG8h8lGfv7Rgsq4cvtH8pzulcCDXvK0crCxOnAhGQNVKpkDxlE9y6Pa
+#      ExKYSIHIdM9Y46fueKbNP3rPIxCZkT6pOcq+ZuAUpl1zCWRY4Qc/XqQ56Epmj18d
+#      K7GAPxLItnKU34vjO4YqCUXH6X66ebqrYe1SwPkQPQKBgE0XsbfAD9gwhFz/wPjW
+#      luSx0pJ7LsA7QudBaf/yC0w7A3+IGqVEDkz4LveomSbqFMKP0AFt4dhw9bwPxcos
+#      J7aprYRG1BfHRcrFrALjrcbiJI4sblEPK+x6oPVo/E+G16vgx5NlcSdCnzPixXAJ
+#      ANVxyzA+yP2HmW48033QPO7b
+#      -----END PRIVATE KEY-----
+#    expiration: 300   # 5 min
+#
+##validating
+#Flight:
+#  service:
+#    public-key: |
+#      -----BEGIN PUBLIC KEY-----
+#      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyZ6wbZ04N0iYZN67JdyJ
+#      59wwUUez6A79yEp8DOekBF0Crl1rJ9X8RV0dVSuYhRjdmgB/SYHGoy5i4y1Vv4hF
+#      yPLyVu+vfYGw9z0iayjmRVZEHDuOeK5wLLn/CkW60LJ3uWSlKSwr3i8/DumD1QEO
+#      DyzaU6EHgnypXnEX0ebPP/cwZwWCn7qg8NeaOrr7xa2MeEng96qFbRZfJKD3JibK
+#      GsrdQOmZ3fiLSum1CEFVul0Hc6aXfrFei/xHgvTcodq+QBdmMxM4o7RriWP5+479
+#      uoyBLurKL7vy5r9o/lrqWvCCDWbga2vS0js595gTYffp/lpX4OM+kxQYMn66oOx1
+#      MwIDAQAB
+#      -----END PUBLIC KEY-----
+#

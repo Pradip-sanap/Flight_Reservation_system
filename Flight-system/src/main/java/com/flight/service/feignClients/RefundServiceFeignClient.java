@@ -1,7 +1,7 @@
-package com.flight.service;
+package com.flight.service.feignClients;
 
 import com.flight.dto.RefundDto;
-import com.flight.dto.RefundResponse;
+import com.flight.dto.response.RefundResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

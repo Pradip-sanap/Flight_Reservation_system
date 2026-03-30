@@ -1,8 +1,8 @@
 package com.flight.service;
 
-import com.flight.dto.BookingResponse;
+import com.flight.dto.response.BookingResponse;
 import com.flight.dto.PaymentDto;
-import com.flight.dto.RefundResponse;
+import com.flight.dto.response.RefundResponse;
 import com.flight.model.Booking;
 
 import java.util.List;

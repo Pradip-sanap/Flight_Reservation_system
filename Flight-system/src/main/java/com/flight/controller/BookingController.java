@@ -1,9 +1,9 @@
 package com.flight.controller;
 
 import com.flight.dto.BookingDto;
-import com.flight.dto.BookingResponse;
+import com.flight.dto.response.BookingResponse;
 import com.flight.dto.PaymentDto;
-import com.flight.dto.RefundResponse;
+import com.flight.dto.response.RefundResponse;
 import com.flight.model.Booking;
 import com.flight.service.BookingService;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +21,7 @@ public class BookingController {
     private final BookingService bookingService;
 
     @PostMapping()
-    public ResponseEntity<BookingResponse> bookFlight(
-//            @RequestParam Integer userId,
-//            @RequestParam String flightNumber,
-//            @RequestParam Integer seatCount
-            @RequestBody BookingDto bookingDto
-            )
-    {
+    public ResponseEntity<BookingResponse> bookFlight(@RequestBody BookingDto bookingDto) {
         BookingResponse resp = bookingService.bookFlight(bookingDto.getUserId(), bookingDto.getFlightNumber(), bookingDto.getSeatCount());
         return new ResponseEntity<>(resp, HttpStatus.CREATED);
     }

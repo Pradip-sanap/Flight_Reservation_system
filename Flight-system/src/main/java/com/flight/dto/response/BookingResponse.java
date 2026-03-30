@@ -1,4 +1,4 @@
-package com.flight.dto;
+package com.flight.dto.response;
 
 import lombok.Data;
 

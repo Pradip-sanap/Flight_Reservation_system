@@ -1,7 +1,7 @@
 package com.flight.controller;
 
 import com.flight.dto.AuthRequest;
-import com.flight.dto.AuthResponse;
+import com.flight.dto.response.AuthResponse;
 import com.flight.jwt.JwtService;
 import com.flight.model.RefreshToken;
 import com.flight.service.RefreshTokenService;
@@ -55,4 +55,6 @@ public class AuthController {
 
         return "Access Token: "+ newAccessToken;
     }
+
+
 }

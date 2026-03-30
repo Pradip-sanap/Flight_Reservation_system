@@ -12,7 +12,6 @@ spring:
     hibernate:
       ddl-auto: update
 #    database-platform: org.hibernate.dialect.MySQL8Dialect
-
 #    show-sql: true
 #    properties:
 #      hibernate:
@@ -25,3 +24,65 @@ jwt:
     expiration: 3600000                             # milliseconds    - 60 minutes
   refresh:
     expiration: 604800000                           # 7 days
+
+
+logging:
+  level:
+#    root: INFO
+    com.flight: TRACE
+    com.flight.controller: TRACE
+    com.flight.service.impl: TRACE
+#    com.flight.jwt: TRACE
+#    com.flight.config: DEBUG
+#  pattern:
+#    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+
+
+
+# Inter-service communication
+#Signing
+#Flight:
+#  service:
+#    private-key: |
+#      -----BEGIN PRIVATE KEY-----
+#      MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDJnrBtnTg3SJhk
+#      3rsl3Inn3DBRR7PoDv3ISnwM56QEXQKuXWsn1fxFXR1VK5iFGN2aAH9JgcajLmLj
+#      LVW/iEXI8vJW7699gbD3PSJrKOZFVkQcO454rnAsuf8KRbrQsne5ZKUpLCveLz8O
+#      6YPVAQ4PLNpToQeCfKlecRfR5s8/9zBnBYKfuqDw15o6uvvFrYx4SeD3qoVtFl8k
+#      oPcmJsoayt1A6Znd+ItK6bUIQVW6XQdzppd+sV6L/EeC9Nyh2r5AF2YzEzijtGuJ
+#      Y/n7jv26jIEu6sovu/Lmv2j+Wupa8IINZuBra9LSOzn3mBNh9+n+Wlfg4z6TFBgy
+#      frqg7HUzAgMBAAECggEAVtHjzT/fXkb/gKg81J/0LoitscJ7oRkbhW01n+T7xvk6
+#      V1VY+E14FXJ0WCGuytmbS16dcUzV+ZzW7lauTwziaBbd7jvGSPhY+Q41TQnOptrv
+#      92xZ/HO5UDlDruu593Zygb3qNSGVPlcAA27g2w9aO4Sn+00jS7hcwpNWm4eVhUgr
+#      qS1BKUNtj9RPau8xaBruLu0oiL8S+SvJ35vqzy5PQ80QL6dvmuj+8Q1sAEfS25Ip
+#      uw1MEEnLL7dAzNkQDc4R3Kengjjm1Udd0beVaee5TM+reMBIP4aeuch0M/2G8TMy
+#      +m9Bu+GPhRGbGjpR6VCPreOA8ql3c1nmOCpw0B8wcQKBgQDqSEZ+82Tb0zK3oIb3
+#      YHIFSgiAIk4WAZpXjc/+ag3wHo8kZhOBHPof08tMHMmAwmMB58VwbFqCfQSRNQf5
+#      ULOFNkxLWVCUcvrfJNxasmoFHFgqqC6SMn33KzGrwnAPkeZVMKtjkpROqdMAzqqf
+#      kzRTF7u3M7sNr48JrowMMzdVSwKBgQDcT04shDB6yJfWpOt9Rr2wXZFmleJLFAMz
+#      N+Dep2wvY+M5FrXGALIhwHc3jDG6W+xwcwF/61ffDB/UYj8HcvOcQMv7um78V9s8
+#      +RqxfxJh3fB7fzemvfGuxLbJaag6EoGv/Zhs/T39mSAdQhixnQyapKkt0tzKJjoD
+#      miOs6JY2uQKBgFLOkPw2EyQPlhGJT6sID8UG0dJYTblBf8gKe8W0vpBsfLOk0KgG
+#      EfJF7clNM3urOUtnHEYMRkFw5rhcQiFBAPLIqlbHjs+phDpy0N/Nx+NejVsmbq+F
+#      4TgHsFrBMtKOAxeBSFK9cGYNaGMUqQIWCZyE+vhZ9Hd14dzOMPnu8FPZAoGAQH02
+#      dPF8/3QYfkxoYpOCk03QcicNxsxk42lH+eUoVfb3XI65RuyNODQOscPoCpU98Oy5
+#      U6igYDo8Vv8rVBLiHKsbCuTX+CX/lymUFsELsHo3Gu9yauzPAkmy9+JlzBn+vHWP
+#      WNgIfWOFcwsWD2fZeKsamr9Owh3OfZ9xMfwjfIECgYBIvpgsq0jO0h9ErvOg25xL
+#      qgixi/uMJwar7LNxW1WuFvxDImnHYmpROETs1XCmfzRC+SmL6z3LKxgTcn/k2Kgs
+#      xbq1ofHrL6jQZFDTvgALB2j56W8VwK6pvAk1vYbcV4dSBH0a6xoGlkx/vKDl99Yw
+#      VxTs10ERa2Md8zDPJy04jQ==
+#      -----END PRIVATE KEY-----
+#    expiration: 300         # 5 min
+#
+#Account:
+#  service:
+#    public-key: |
+#      -----BEGIN PUBLIC KEY-----
+#      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3mezJGpuc++biiWRNWka
+#      6cwH72WTpYhzi/7Nz7TMUuwL6UKPPUnumJF3tIte+FpGW0krvjNSg61ZtG6bDCkl
+#      I9lCQR2k4GViC7LCvU3RJIonDQ2k39qogVArczWy3EWzO3ihKz7IZxMVj2CuxMYW
+#      EU1ALwGfNJ++H9zu1NTKANqXa6I9eKY3mXEESwAWH2GKISbUsTA7CudLmRiCcGot
+#      eLxvcVsW+p8lclX+yyLKABTJp7PqLltq0uxKbs6El8vf62aqlguaDZXSG86D2dHt
+#      OHux34zDPncmwv6to31GNYI0LGrRmWkW672wx+IIGW2RLdcLSrlYm9USn6Zn9oLW
+#      xQIDAQAB
+#      -----END PUBLIC KEY-----

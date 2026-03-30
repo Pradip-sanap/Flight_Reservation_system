@@ -17,12 +17,12 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer paymentId;
     private Integer bookingId;
-    private Double price;
+    private Double amount;
     private LocalDateTime dateTime;
 
-    public Payment(Integer bookingId, Double price, LocalDateTime now) {
+    public Payment(Integer bookingId, Double amount, LocalDateTime now) {
         this.bookingId = bookingId;
-        this.price = price;
+        this.amount = amount;
         this.dateTime = now;
     }
 

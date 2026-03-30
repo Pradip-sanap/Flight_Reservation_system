@@ -1,4 +1,4 @@
-package com.flight.dto;
+package com.flight.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 public class ErrorResponse {
     private LocalDateTime timestamp;
     private HttpStatus status;
-    private String error;
     private String message;
     private String path;
 

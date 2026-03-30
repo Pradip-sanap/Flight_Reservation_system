@@ -1,10 +1,11 @@
 package com.flight.service;
 
+import com.flight.dto.PaymentDto;
 import com.flight.model.Payment;
 
 public interface PaymentService {
 
-    Payment newPaymentCreate(Payment payment);
-    Payment getPaymentByPaymentId(Integer payment);
+    PaymentDto newPaymentCreate(PaymentDto payment);
+    PaymentDto getPaymentByPaymentId(Integer payment);
 
 }

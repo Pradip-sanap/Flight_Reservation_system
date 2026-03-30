@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +19,7 @@ import java.io.IOException;
 
 @RequiredArgsConstructor
 @Component
+@Slf4j
 public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
@@ -27,31 +29,43 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException
     {
-       // This if block contain code for allowing new user registration api. This api did not need token during registration
+        log.info("Request processing in JWT filter: {}", request.getServletPath());
+       // bypass JWT validation for new user registration api. This api did not need token during registration
         String path = request.getServletPath();
-        if (path.equals("/api/user") && request.getMethod().equals("POST")) {
+        if (path.equals("/api/user") && request.getMethod().equalsIgnoreCase("POST")) {
+            log.debug("Skipping JWT filter for user registration endpoint: {}", path);
             filterChain.doFilter(request, response);
             return;
         }
 
-//         System.out.println("JwtFilter called");
+
         String authHeader = request.getHeader("Authorization");
-        String token = null;
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            token = authHeader.substring(7);
+        try {
+            if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                String token = authHeader.substring(7);
+
+                if (jwtService.validateToken(token)) {
+                    String username = jwtService.extractUsername(token);
+                    UserDetails user = userService.loadUserByUsername(username);
+
+                    UsernamePasswordAuthenticationToken authentication =
+                            new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    log.debug("JWT token validated successfully for username={}", username);
+                } else {
+                    log.warn("Invalid JWT token received");
+                }
+            } else {
+                log.warn("Authorization header missing or does not start with Bearer");
+            }
+        } catch (Exception ex) {
+            log.error("Error validating JWT token", ex);
         }
 
-        if (token != null && jwtService.validateToken(token)) {
-            System.out.println("Valid JWT Token");
 
-            String username = jwtService.extractUsername(token);            // extract username from token
-            UserDetails user = userService.loadUserByUsername(username);    // get userObj from db using username
-            UsernamePasswordAuthenticationToken a = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(a);
-        } else {
-            System.out.println("Invalid JWT Token");
-        }
 
         filterChain.doFilter(request, response);
+
     }
 }

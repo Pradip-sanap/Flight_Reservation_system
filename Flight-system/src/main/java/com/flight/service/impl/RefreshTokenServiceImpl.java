@@ -6,12 +6,14 @@ import com.flight.model.RefreshToken;
 import com.flight.repository.RefreshTokenRepository;
 import com.flight.service.RefreshTokenService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class RefreshTokenServiceImpl implements RefreshTokenService {
 
@@ -22,8 +24,10 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
     @Override
     public RefreshToken saveRefreshTokenInDB(String username, String refreshToken) {
+        log.info("Request received for saving refresh token to DB");
         RefreshToken obj = new RefreshToken(username, refreshToken);
         obj.setExpiryDate(new Date(System.currentTimeMillis() + refreshExp));
+        log.info("Refresh token saved successfully");
         return refreshTokenRepository.save(obj);
     }
 

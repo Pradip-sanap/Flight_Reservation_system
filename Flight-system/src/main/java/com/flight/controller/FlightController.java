@@ -28,8 +28,6 @@ public class FlightController {
         return ResponseEntity.ok(flight);
     }
 
-
-
     @GetMapping()
     public ResponseEntity<List<Flight>> getAllFlights(){
         List<Flight> flights = flightService.getAllFlights();
