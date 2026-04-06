@@ -20,7 +20,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Slf4j
 public class SecurityConfig {
 
-    private final JwtFilter filter;
+    private final JwtFilter jwtFilter;
+
+
     @Bean
     public SecurityFilterChain chain(HttpSecurity http){
 
@@ -42,10 +44,11 @@ public class SecurityConfig {
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers("/auth/**").permitAll()                   // Auth endpoints open
                             .requestMatchers(HttpMethod.POST, "/api/user").permitAll() // Registration endpoint open
-                            .anyRequest().authenticated()                                       // All other endpoints require auth
+                            .anyRequest()
+                            .authenticated()                                                    // All other endpoints require auth
                     )
                     .exceptionHandling(ex -> ex.authenticationEntryPoint(unauthorizedHandler)) // Handle 401
-                    .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
+                    .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                     .build();
 
             log.info("Security Filter Chain initialized successfully.");

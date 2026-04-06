@@ -79,7 +79,7 @@ class BookingServiceImpl implements BookingService {
     public List<Booking> getUsersBookings(Integer userId) {
         log.info("Fetching bookings for user | userId: {}", userId);
         // validate userId
-        if (!userService.validateUserId(userId)) {
+        if (userService.validateUserId(userId).equals("User Exists")) {
             log.warn("User validation failed | userId: {}", userId);
             throw new UserNotFoundException("User Not Found with userId: " + userId);
         }
